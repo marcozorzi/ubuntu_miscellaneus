@@ -2,34 +2,32 @@
 # Ask the password right away
 sudo -s
 #Install terminator
-sudo apt-get install terminator -y
+sudo apt install terminator -y
 # Install mp3 codecs
-sudo apt-get install ubuntu-restricted-extras -y
-# Install repo for mac look
-sudo add-apt-repository ppa:noobslab/themes
-sudo add-apt-repository ppa:docky-core/ppa
-sudo add-apt-repository -y ppa:webupd8team/sublime-text-2
-sudo apt-get update
-# Install mac look packages and set them
-sudo apt-get install mbuntu-y-ithemes-v4 -y
-sudo apt-get install mbuntu-y-icons-v4 -y
-sudo apt-get install docky -y
-cd && wget -O config.sh http://drive.noobslab.com/data/Mac-14.10/config.sh
-chmod +x config.sh;./config.sh
-# Install Sublime text
-sudo apt-get install sublime-text
+#sudo apt install ubuntu-restricted-extras -y
+# Install gnome tweaks
+#sudo apt install gnome-tweaks
+# Install ghrome-gnome-shell connector
+#sudo apt install chrome-gnome-shell
 
+sudo apt update
 
 #Install ros
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
-sudo apt-get update
-sudo apt-get install ros-indigo-desktop-full -y
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+sudo apt update
+sudo apt install ros-melodic-desktop-full -y
+
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+
+sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential -y
+sudo apt update
+
 sudo rosdep init
 rosdep update
-echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
-source ~/.bashrc
-sudo apt-get install python-rosinstall -y
+
 
 #add git coloring
 echo "parse_git_branch() {
@@ -67,22 +65,6 @@ if grep -Fxq "$exportline" ~/.profile; then echo nothing to do ; else echo $expo
 . ~/.profile
 popd
 
-
-# generating ssh key for git
-echo "********************************************************"
-echo "*********** generating ssh key for git *****************"
-echo "********************************************************"
-ssh-keygen -t rsa -b 4096 -C "marcozo91@gmail.com"
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
-sudo apt-get install xclip -y
-xclip -sel clip < ~/.ssh/id_rsa.pub
-echo "********************************************************"
-echo "*********** Copied SSH key in clipboard ****************"
-echo "**************** Add it to git NOW *********************"
-echo "********************************************************"
-git config --global user.name "Marco Zorzi"
-git config --global user.email "marcozo91@gmail.com"
 
 # Clone firmware
 mkdir -p ~/src
